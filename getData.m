@@ -21,10 +21,3 @@ death_res = splitapply(@sum,death.Cases,findgroups(death.Date))*normalization;
 recovered_res = splitapply(@sum,recovered.Cases,findgroups(recovered.Date))*normalization;
 
 date = unique(active.Date);
-
-figure
-plot(date, active_res),hold on
-plot(date, confirmed_res)
-plot(date, death_res)
-plot(date, recovered_res), hold off
-legend('active','confirmed','death','recovered')
