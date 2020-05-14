@@ -8,21 +8,16 @@ active_res_china = getData(data, "China",97/147);
 
 x = dates2num(date);
 y = active_res_china;
-
-
-yp = log((y./x));
-A = [x.^2, x ,ones(size(x))];
-
-sol = inv(A'*A)*(A'*yp); 
-
-C = sol(1); B = sol(2); A = exp(sol(3));
-
 forecast = 30;
 
-newdate = getVectorDates(date,forecast);
+
+model = train(x,y);
 x=[1:x(end)+forecast];
+prediction = evalue(model,x);
+
+newdate = getVectorDates(date,forecast);
 
 plot(date,active_res_china,'b'), hold on
-plot(newdate, A*x.*exp(B*x + C*x.^2),'g')
+plot(newdate,prediction,'g')
 
 
